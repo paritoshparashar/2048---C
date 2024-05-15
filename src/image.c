@@ -26,19 +26,43 @@ void apply_threshold(float *img, int w, int h, int T) {
             img[i] = 255;               // Color White
         }
     }
-    
-
 
 }
 
 
 void scale_image(float *result, const float *img, int w, int h) {
-    (void)result;
-    (void)img;
-    (void)w;
-    (void)h;
+    
+    if (img == NULL || w==0 || h==0 || result == NULL){
+        return;                         // Error Handling
+    }
 
-    // TODO: Implement me!
+    int imgArrLength = w*h;
+
+    float min = 3.4e38f;
+    float max = -3.4e38f;
+
+    for (int i = 0; i < imgArrLength; i++){
+        
+        if (img[i] < min){
+            min = img[i];               // Calculate min pixel
+        }
+
+        if (img[i]>max){
+            max = img[i];               // Calculate max pixel
+        }
+        
+    }
+
+    float range = max - min;
+    
+    for (int i = 0; i < imgArrLength; i++){
+        
+        float scaledPixel = ((img[i] - min)/range) * 255 ;  // Calculate scaled pixel
+        assert(scaledPixel<=255 && scaledPixel>=0);         // Error Handling 
+
+        result[i] = scaledPixel;                            // Store the scaled pixel     
+    }
+    
 }
 
 float get_pixel_value(const float *img, int w, int h, int x, int y) {
