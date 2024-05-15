@@ -9,15 +9,24 @@
 #include "convolution.h"
 #include "image.h"
 
-void gradient_magnitude(float *result, const float *d_x, const float *d_y,
-                        int w, int h) {
-    (void)result;
-    (void)d_x;
-    (void)d_y;
-    (void)w;
-    (void)h;
+void gradient_magnitude(float *result, const float *d_x, const float *d_y, int w, int h) {
 
-    // TODO: Implement me!
+    if (d_x == NULL || d_y == NULL || w==0 || h==0 || result == NULL){
+        return;
+    }
+
+    int imgArrLength = w*h;
+
+    for (int i = 0; i < imgArrLength; i++)
+    {
+
+        double sumOfSquare = pow(d_x[i],2) + pow(d_y[i],2);
+
+        double gradient = sqrt(sumOfSquare);
+
+        result[i] = gradient;//Store the gradient in the output image
+    }
+    
 }
 
 const float sobel_x[9] = {1, 0, -1, 2, 0, -2, 1, 0, -1};
