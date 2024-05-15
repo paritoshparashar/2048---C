@@ -13,8 +13,33 @@ void apply_threshold(float *img, int w, int h, int T) {
     (void)h;
     (void)T;
 
-    // TODO: Implement me!
+    int pixel = 0;
+
+    if (img == NULL || w==0 || h==0){
+        return;
+    }
+
+    // First read the meta data of the image 
+
+    do
+    {
+        
+        if (pixel <= T)
+        {
+            ;
+        }
+
+        else 
+        {
+            ;
+        }
+
+    } while (pixel != EOF);
+    
+
+
 }
+
 
 void scale_image(float *result, const float *img, int w, int h) {
     (void)result;
