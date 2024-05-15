@@ -10,22 +10,20 @@
 void apply_threshold(float *img, int w, int h, int T) {
 
     if (img == NULL || w==0 || h==0){
-        return;
+        return;                         // Error Handling
     }
 
-    // First read the meta data of the image 
     int imgArrLength = w*h;
 
     for (int i = 0; i < (imgArrLength); i++)
     {
         if (img[i] <= T)
         {
-            img[i] = 0;                 //Color Black;
+            img[i] = 0;                 // Color Black;
         }
-
         else 
         {
-            img[i] = 255;               //Color White
+            img[i] = 255;               // Color White
         }
     }
     

@@ -12,19 +12,17 @@
 void gradient_magnitude(float *result, const float *d_x, const float *d_y, int w, int h) {
 
     if (d_x == NULL || d_y == NULL || w==0 || h==0 || result == NULL){
-        return;
+        return;                                             // Error Handling
     }
 
     int imgArrLength = w*h;
 
     for (int i = 0; i < imgArrLength; i++)
     {
-
         double sumOfSquare = pow(d_x[i],2) + pow(d_y[i],2);
+        double gradient = sqrt(sumOfSquare);                //  Calculate the gradient from partial derivatives
 
-        double gradient = sqrt(sumOfSquare);
-
-        result[i] = gradient;//Store the gradient in the output image
+        result[i] = gradient;                               // Store the gradient in the output image
     }
     
 }
