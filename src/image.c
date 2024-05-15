@@ -41,26 +41,40 @@ void scale_image(float *result, const float *img, int w, int h) {
     float min = 3.4e38f;
     float max = -3.4e38f;
 
+
+    // Loop for calculating min and max
+    
     for (int i = 0; i < imgArrLength; i++){
         
         if (img[i] < min){
-            min = img[i];               // Calculate min pixel
+            min = img[i];               // min pixel
         }
 
         if (img[i]>max){
-            max = img[i];               // Calculate max pixel
+            max = img[i];               // max pixel
         }
         
     }
 
-    float range = max - min;
-    
-    for (int i = 0; i < imgArrLength; i++){
-        
-        float scaledPixel = ((img[i] - min)/range) * 255 ;  // Calculate scaled pixel
-        assert(scaledPixel<=255 && scaledPixel>=0);         // Error Handling 
+    if (max == min){                     // Edge Case
 
-        result[i] = scaledPixel;                            // Store the scaled pixel     
+        for (int i = 0; i < imgArrLength; i++){
+            result[i] = 0;              // Output a Black Image
+        }
+
+    }
+
+    else{                               // Normal Case
+
+        float range = max - min;
+    
+        for (int i = 0; i < imgArrLength; i++){
+
+            float scaledPixel = ((img[i] - min)/range) * 255 ;  // Calculate scaled pixel
+            assert(scaledPixel<=255 && scaledPixel>=0);         // Error Handling 
+
+            result[i] = scaledPixel;                            // Store the scaled pixel     
+        }
     }
     
 }
