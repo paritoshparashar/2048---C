@@ -43,7 +43,7 @@ void scale_image(float *result, const float *img, int w, int h) {
 
 
     // Loop for calculating min and max
-    
+
     for (int i = 0; i < imgArrLength; i++){
         
         if (img[i] < min){
@@ -80,15 +80,40 @@ void scale_image(float *result, const float *img, int w, int h) {
 }
 
 float get_pixel_value(const float *img, int w, int h, int x, int y) {
-    (void)img;
-    (void)w;
-    (void)h;
-    (void)x;
-    (void)y;
 
-    // TODO: Implement me!
+    float grayscale;
+    int newX = x;
+    int newY = y;
 
-    return 0;
+    int maxW = w-1;
+    int maxH = h-1;
+
+    // Calculate adjusted x coordinate below
+    
+    if (x < 0)
+    {
+        newX = (x*(-1)) - 1;
+    }
+    else if (x > (maxW))
+    {
+        newX = (2*(maxW)) - x + 1 ;
+    }
+
+    // Calculate adjusted y coordinate below
+    
+    if (y < 0)
+    {
+        newY = (y*(-1)) - 1;
+    }
+    else if (x > (maxH))
+    {
+        newY = (2*(maxH)) - y + 1 ;
+    }
+    
+
+    grayscale = img[(w*newY)+ newX];
+
+    return grayscale;
 }
 
 float *array_init(int size) {
