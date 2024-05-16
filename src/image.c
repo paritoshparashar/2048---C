@@ -116,6 +116,9 @@ float get_pixel_value(const float *img, int w, int h, int x, int y) {
     }
     
     //Error Handling
+    if((newX >= w || newX <0) || (newY >= h || newY <0)){
+        get_pixel_value(img , w , h , newX , newY);
+    }
 
     assert((newX < w && newX >=0) && (newY < h && newY >=0));
 
