@@ -81,6 +81,11 @@ void scale_image(float *result, const float *img, int w, int h) {
 
 float get_pixel_value(const float *img, int w, int h, int x, int y) {
 
+
+    if (img == NULL || w==0 || h==0 ){
+        return 1;                         // Error Handling
+    }
+
     float grayscale;
     int newX = x;
     int newY = y;
@@ -110,9 +115,11 @@ float get_pixel_value(const float *img, int w, int h, int x, int y) {
         newY = (2*(maxH)) - y + 1 ;
     }
     
+    //Error Handling
 
-    grayscale = img[(w*newY)+ newX];
+    assert((newX < w && newX >=0) && (newY < h && newY >=0));
 
+    grayscale = img[(w*newY)+ newX];        // Get the new pixel value 
     return grayscale;
 }
 
