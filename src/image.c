@@ -120,6 +120,8 @@ float get_pixel_value(const float *img, int w, int h, int x, int y) {
         get_pixel_value(img , w , h , newX , newY);
     }
 
+    printf("%d %d\n", newX , newY);
+    
     assert((newX < w && newX >=0) && (newY < h && newY >=0));
 
     grayscale = img[(w*newY)+ newX];        // Get the new pixel value 
