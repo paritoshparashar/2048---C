@@ -156,41 +156,74 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
 
     FILE* opendedFile = fopen (filename , "r");
 
-    int width;
-    int height;
-    int maxBrightness;
+    float width;
+    float height;
+    float maxBrightness;
 
     // Error handling = File format not correct
 
-    if ( (fscanf(opendedFile , "P2 %d %d %d" , &width , &height , &maxBrightness )) != 3)
+    if ( (fscanf(opendedFile , "P2 %f %f %f" , &width , &height , &maxBrightness )) != 3)
     {
         fclose(opendedFile);
         return NULL;    
     }
 
+    // Change the float read values to int
+    int maxBrightness_int = (int) maxBrightness;
+    int width_int = (int) width;
+    int height_int = (int) height;
+
     // Error handling = widht/height/maxBright not correct
 
-    if ( width<=0 || height<=0 || maxBrightness!= 255)
+    if ( width_int<=0 || height_int<=0 || maxBrightness_int!= 255)
     {
         fclose(opendedFile);
         return NULL;
     }
 
-    assert (width > 0 && height > 0 && maxBrightness == 255);
+    assert (width_int > 0 && height_int > 0 && maxBrightness_int == 255);
 
     // Store width and height at the location where pointers are pointing to
-
-    *w = width;
-    *h = height;
-
     
     
 
-    
+    *w = width_int;
+    *h = height_int;
 
     
+    int lengthOfImageArr = (width_int * height_int) -1; 
+    //printf ("%d\n" , lengthOfImageArr);
 
-    return NULL;
+    float* image = array_init ((width_int * height_int));
+    assert (image != NULL);
+
+    for (int i = 0; i <= lengthOfImageArr; i++)
+    {
+        int readSuccess = fscanf ( opendedFile, "%f" , &image[i]);
+        if (!readSuccess)
+        {
+            fclose(opendedFile);
+            return NULL;
+        }
+        //printf ("%f " , image[i]);
+         
+    }
+
+    float end;
+
+    if (fscanf (opendedFile , "%f" , &end) != EOF){
+        fclose (opendedFile);
+        printf ("Hello");
+        return NULL;
+    }
+    
+    
+    
+    
+
+    fclose (opendedFile);
+    return image;
+
 }
 
 void write_image_to_file(const float *img, int w, int h, const char *filename) {
