@@ -145,11 +145,50 @@ void array_destroy(float *m) {
 }
 
 float *read_image_from_file(const char *filename, int *w, int *h) {
-    (void)filename;
-    (void)w;
-    (void)h;
+    
+    // Error handling = File not present
 
-    // TODO: Implement me!
+    if (filename == NULL){
+        return NULL;
+    }
+
+    // Open file if it exists, don't forget to close it bud
+
+    FILE* opendedFile = fopen (filename , "r");
+
+    int width;
+    int height;
+    int maxBrightness;
+
+    // Error handling = File format not correct
+
+    if ( (fscanf(opendedFile , "P2 %d %d %d" , &width , &height , &maxBrightness )) != 3)
+    {
+        fclose(opendedFile);
+        return NULL;    
+    }
+
+    // Error handling = widht/height/maxBright not correct
+
+    if ( width<=0 || height<=0 || maxBrightness!= 255)
+    {
+        fclose(opendedFile);
+        return NULL;
+    }
+
+    assert (width > 0 && height > 0 && maxBrightness == 255);
+
+    // Store width and height at the location where pointers are pointing to
+
+    *w = width;
+    *h = height;
+
+    
+    
+
+    
+
+    
 
     return NULL;
 }
