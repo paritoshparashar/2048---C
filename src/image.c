@@ -127,11 +127,12 @@ float get_pixel_value(const float *img, int w, int h, int x, int y) {
 }
 
 float *array_init(int size) {
-    (void)size;
+    
+    float* arr = malloc ( size * sizeof(arr[0]));
 
-    // TODO: Implement me!
+    assert(arr != NULL);
 
-    return NULL;
+    return arr;
 }
 
 void array_destroy(float *m) {
