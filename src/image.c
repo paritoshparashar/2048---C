@@ -136,9 +136,12 @@ float *array_init(int size) {
 }
 
 void array_destroy(float *m) {
-    (void)m;
+    
+    assert ( m != NULL);
 
-    // TODO: Implement me!
+    free (m);
+
+    
 }
 
 float *read_image_from_file(const char *filename, int *w, int *h) {
