@@ -184,33 +184,34 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
     assert (width_int > 0 && height_int > 0 && maxBrightness_int == 255);
 
     // Store width and height at the location where pointers are pointing to
-    
-    
 
     *w = width_int;
     *h = height_int;
-
+    
     
     int lengthOfImageArr = (width_int * height_int) -1; 
-    //printf ("%d\n" , lengthOfImageArr);
 
+    // Get the memory to store image
     float* image = array_init ((width_int * height_int));
     assert (image != NULL);
 
     for (int i = 0; i <= lengthOfImageArr; i++)
     {
+        // Condition for too few pixels?
+
+
         int readSuccess = fscanf ( opendedFile, "%f" , &image[i]);
-        if (!readSuccess)
+        
+        if (readSuccess != 1)
         {
             fclose(opendedFile);
             return NULL;
         }
-        //printf ("%f " , image[i]);
          
     }
 
     float end;
-
+    // Error Handling for too many pixels
     if (fscanf (opendedFile , "%f" , &end) != EOF){
         fclose (opendedFile);
         printf ("Hello");
