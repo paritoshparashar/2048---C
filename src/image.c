@@ -201,6 +201,16 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
 
 
         int readSuccess = fscanf ( opendedFile, "%f" , &image[i]);
+
+        // Error Handling : pixel < 0 or pixel > 255 => broken image
+
+        if (image[i] < 0 || image[i] > 255)
+        {
+            fclose(opendedFile);
+            return NULL;
+        }
+        
+        // Error Handling : Too few pixels
         
         if (readSuccess != 1)
         {
@@ -211,7 +221,9 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
     }
 
     float end;
+
     // Error Handling for too many pixels
+    
     if (fscanf (opendedFile , "%f" , &end) != EOF){
         fclose (opendedFile);
         printf ("Hello");
