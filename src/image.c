@@ -197,8 +197,6 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
 
     for (int i = 0; i <= lengthOfImageArr; i++)
     {
-        // Condition for too few pixels?
-
 
         int readSuccess = fscanf ( opendedFile, "%f" , &image[i]);
 
@@ -206,6 +204,7 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
 
         if (image[i] < 0 || image[i] > 255)
         {
+            array_destroy (image);
             fclose(opendedFile);
             return NULL;
         }
@@ -214,25 +213,25 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
         
         if (readSuccess != 1)
         {
+            array_destroy (image);
             fclose(opendedFile);
             return NULL;
         }
          
     }
 
-    float end;
-
-    // Error Handling for too many pixels
+    // Error Handling : Too many pixels
     
-    if (fscanf (opendedFile , "%f" , &end) != EOF){
+    float end;
+    
+    if (fscanf (opendedFile , "%f" , &end) != EOF)
+    {
+        array_destroy (image);
         fclose (opendedFile);
-        printf ("Hello");
         return NULL;
     }
-    
-    
-    
-    
+
+    // Successful : Close file and return the pointer to memory
 
     fclose (opendedFile);
     return image;
