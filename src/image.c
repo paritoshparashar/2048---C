@@ -221,7 +221,7 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
     }
 
     // Error Handling : Too many pixels
-    
+
     float end;
     
     if (fscanf (opendedFile , "%f" , &end) != EOF)
@@ -239,10 +239,36 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
 }
 
 void write_image_to_file(const float *img, int w, int h, const char *filename) {
-    (void)img;
-    (void)w;
-    (void)h;
-    (void)filename;
+    
+    FILE* output_file = fopen (filename , "w");
 
-    // TODO: Implement me!
+    if (output_file == NULL)
+    {
+        return;
+    }
+
+    // Write the headers
+
+    fprintf ( output_file , "P2\n");
+    fprintf ( output_file , "%d %d\n" , w , h);
+    fprintf ( output_file , "255\n");
+
+    // Load Pixels
+
+    for (int i = 0; i < h; i++)
+    {
+        for (int j = 0; j < w; j++)
+        {
+            int pixel_val  = (int) img[w*i + j];
+
+            fprintf ( output_file , "%d " , pixel_val);
+        }
+        
+        fprintf ( output_file , "\n");
+        
+    }
+    
+    fclose (output_file);
+    return;
+    
 }
