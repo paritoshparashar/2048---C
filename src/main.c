@@ -83,9 +83,6 @@ int main(int const argc, char **const argv) {
        float* y_scaled_img = array_init ((*width) * (*height));
        scale_image ( y_scaled_img , y_derived_img , *width , *height);
 
-       array_destroy (x_derived_img);
-       array_destroy (y_derived_img);
-
 
        // Write the scaled images to respective pgm files
 
@@ -102,7 +99,19 @@ int main(int const argc, char **const argv) {
      *
      * Afterwards, rescale the result and write it to out_gm.pgm.
      */
-    // TODO: Implement me!
+
+       // Compute Gradient of x and y derivations
+
+       float* gradient_img = array_init ((*width) * (*height));
+
+       gradient_magnitude ( gradient_img , x_derived_img , y_derived_img , *width , *height);
+
+       array_destroy (x_derived_img);
+       array_destroy (y_derived_img);
+
+       // Write the gradient result to out_gm
+
+       write_image_to_file (gradient_img , *width , *height , "out_gm.pgm");
 
     /**
      * Apply the threshold to the gradient magnitude.
