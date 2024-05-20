@@ -73,7 +73,7 @@ int main(int const argc, char **const argv) {
        derivation_x_direction ( x_derived_img , convolved_img , width , height);
 
        float* y_derived_img = array_init ((width) * (height));
-       derivation_x_direction ( y_derived_img , convolved_img , width , height);
+       derivation_y_direction ( y_derived_img , convolved_img , width , height);
 
        array_destroy (convolved_img);
 
@@ -117,7 +117,7 @@ int main(int const argc, char **const argv) {
        float* scaled_gradient_img = array_init ((width) * (height));
        scale_image (scaled_gradient_img , gradient_img , width , height);
 
-       write_image_to_file (gradient_img , width , height , "out_gm.pgm");
+       write_image_to_file (scaled_gradient_img , width , height , "out_gm.pgm");
        array_destroy (scaled_gradient_img);
 
     /**
