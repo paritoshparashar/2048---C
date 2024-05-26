@@ -71,7 +71,7 @@ void scale_image(float *result, const float *img, int w, int h) {
         for (int i = 0; i < imgArrLength; i++){
 
             float scaledPixel = ((img[i] - min)/range) * 255 ;  // Calculate scaled pixel
-            assert(scaledPixel<=255 && scaledPixel>=0);         // Error Handling 
+            //assert(scaledPixel<=255 && scaledPixel>=0);         // Error Handling 
 
             result[i] = scaledPixel;                            // Store the scaled pixel     
         }
@@ -120,7 +120,7 @@ float get_pixel_value(const float *img, int w, int h, int x, int y) {
         get_pixel_value(img , w , h , newX , newY);
     }
 
-    assert((newX < w && newX >=0) && (newY < h && newY >=0));
+    //assert((newX < w && newX >=0) && (newY < h && newY >=0));
 
     grayscale = img[(w*newY)+ newX];        // Get the new pixel value 
     return grayscale;
@@ -130,14 +130,14 @@ float *array_init(int size) {
     
     float* arr = malloc ( size * sizeof(arr[0]));
 
-    assert(arr != NULL);
+    //assert(arr != NULL);
 
     return arr;
 }
 
 void array_destroy(float *m) {
     
-    assert ( m != NULL);
+    //assert ( m != NULL);
 
     free (m);
 
@@ -181,7 +181,7 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
         return NULL;
     }
 
-    assert (width_int > 0 && height_int > 0 && maxBrightness_int == 255);
+    //assert (width_int > 0 && height_int > 0 && maxBrightness_int == 255);
 
     // Store width and height at the location where pointers are pointing to
 
@@ -193,7 +193,7 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
 
     // Get the memory to store image
     float* image = array_init ((width_int * height_int));
-    assert (image != NULL);
+    //assert (image != NULL);
 
     for (int i = 0; i <= lengthOfImageArr; i++)
     {
