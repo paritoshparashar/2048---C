@@ -9,7 +9,7 @@
 
 void apply_threshold(float *img, int w, int h, int T) {
 
-    if (img == NULL || w==0 || h==0){
+    if (img == NULL || w==0 || h==0 || T<0){
         return;                         // Error Handling
     }
 
