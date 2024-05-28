@@ -157,6 +157,11 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
 
     FILE* opendedFile = fopen (filename , "r");
 
+    if (opendedFile == NULL)
+    {
+        return NULL;
+    }
+    
     float width;
     float height;
     float maxBrightness;
@@ -194,7 +199,12 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
 
     // Get the memory to store image
     float* image = array_init ((width_int * height_int));
-    //assert (image != NULL);
+    
+    if (image == NULL)
+    {
+        return NULL;
+    }
+    
 
     for (int i = 0; i <= lengthOfImageArr; i++)
     {
@@ -240,6 +250,10 @@ float *read_image_from_file(const char *filename, int *w, int *h) {
 }
 
 void write_image_to_file(const float *img, int w, int h, const char *filename) {
+
+    if (filename == NULL || w == 0 || h == 0  || img == NULL){
+        return;
+    }
     
     FILE* output_file = fopen (filename , "w");
 
