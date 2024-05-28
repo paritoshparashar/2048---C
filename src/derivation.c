@@ -22,7 +22,7 @@ void gradient_magnitude(float *result, const float *d_x, const float *d_y, int w
         double sumOfSquare = pow(d_x[i],2) + pow(d_y[i],2);
         double gradient = sqrt(sumOfSquare);                //  Calculate the gradient from partial derivatives
 
-        result[i] = gradient;                               // Store the gradient in the output image
+        result[i] = (float)gradient;                               // Store the gradient in the output image
     }
     
 }
