@@ -138,17 +138,18 @@ float *array_init(int size) {
 void array_destroy(float *m) {
     
     //assert ( m != NULL);
-
-    free (m);
-
-    
+    if (m != NULL)
+    {
+        free (m);
+    }
+ 
 }
 
 float *read_image_from_file(const char *filename, int *w, int *h) {
     
     // Error handling = File not present
 
-    if (filename == NULL){
+    if (filename == NULL || w == NULL || h == NULL ){
         return NULL;
     }
 
