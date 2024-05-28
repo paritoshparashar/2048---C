@@ -7,6 +7,12 @@
 void convolve(float *result, const float *img, int w, int h,
               const float *matrix, int w_m, int h_m) {
     
+
+    if ( result == NULL || img == NULL || w==0 || h==0 ||
+            matrix == NULL || w_m == 0 || h_m == 0 ){
+                
+        return;                                             // Error Handling
+    }
     float matrix_val;
     int get_pixel_x_coordinate;
     int get_pixel_y_coordinate;
